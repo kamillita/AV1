@@ -1,9 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
 
 char LETRAS[10] = {'A','B','C','D','E', 'F', 'G', 'H', 'I', 'J'};    
+
+int ehNumero(char caractere)
+{
+    const char *numeros = "0123456789";
+    if (strchr(numeros, caractere))
+        {
+            return 1;
+        }
+    return 0;
+}
 
 const char* toUpperCase(char string[1000]) {
   char* saida = calloc(1000, sizeof(char));
@@ -39,7 +48,7 @@ const char* encodeNumeros(char string[1000]) {
     }
     
     // Se for digito: eh convertido em um par de letras sendo a primeira um Z e a segunda uma letra
-    if(isdigit(string[i])){
+    if(ehNumero(string[i]) == 1){
       strncat(saida, "Z", 1);
       strncat(saida, &LETRAS[atoi(&string[i])], 1);
     } 
@@ -106,7 +115,7 @@ const char* decodeLetras(char string[1000]) {
   int j = 0;
   int i;
   while(j < strlen(string)){
-    if(isdigit(string[j]) && ((j + 1) < strlen(string))){
+    if((ehNumero(string[j]) == 1) && ((j + 1) < strlen(string))){
       for(i = 0; i < atoi(&string[j]); i++){
         strncat(saida, &string[j + 1], 1);
       }
