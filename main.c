@@ -19,7 +19,7 @@ const char* toUpperCase(char string[1000]) {
   
   strcpy(saida, string);
   for(int i = 0; string[i]; i++){
-    saida[i] = toupper(string[i]);
+    saida[i] = (string[i]);
   }
 
   return saida;
@@ -160,28 +160,30 @@ const char* decodeNumeros(char string[1000]) {
   return saida;
 }
 
-
-
 int main(void) {
-  char codigo = 'D';
-  char entrada[1000] = "ABC3ZJ2Z";
-  char saida[1000] = "";
+  char codigo[1];
+  char entrada[1000];
+  char saida[1000];
+  
+    printf("Digite C para codificar e D para decodificar: ");
+    scanf("%s", &codigo);
+    
+    printf("Informe o código que deseja usar: ");
+    scanf("%s", &entrada);
 
-  if(codigo == 'C') {
+  if(codigo[0] == 'C'){
     strcpy(saida, toUpperCase(entrada));
     strcpy(saida, encodeNumeros(saida));
     strcpy(saida, encodeLetras(saida));
     printf("Saida: %s", saida);
   }
 
-  if(codigo == 'D') {
+  if(codigo[0] == 'D'){
     strcpy(saida, toUpperCase(entrada));
     strcpy(saida, decodeLetras(saida));
     strcpy(saida, decodeNumeros(saida));
     printf("Saida: %s", saida);
   }
-  
-  
   
   return 0;
 }
